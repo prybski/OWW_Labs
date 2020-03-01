@@ -1,5 +1,6 @@
 #include <time.h>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -76,8 +77,8 @@ int main()
 	cout << "Podaj dwie liczby rzeczywiste: ";
 	cin >> min_real >> max_real;
 
-	cout << endl << "Losowe liczby rzeczywiste z zakresu: " << min_real
-		<< " - " << max_real << endl;
+	cout << endl << "Losowe liczby rzeczywiste z zakresu: " << fixed
+		<< setprecision(4) << min_real << " - " << max_real << endl;
 
 	for (i = 0; i < RANDOM_NUMBERS_COUNT; i++)
 	{
