@@ -19,7 +19,7 @@ int main()
 
 	int rows, columns;
 	int nonzeros_max;
-	int nonzeros_counter = NONZEROS_MIN;
+	int nonzeros_counter = NONZjEROS_MIN;
 	double** matrix;
 
 	srand((unsigned int)time(NULL));
