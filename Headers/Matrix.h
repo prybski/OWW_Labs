@@ -5,9 +5,9 @@
 
 #include "Random.h"
 
+int generate_random_column_index(double*, int);
 double** generate_matrix(int, int);
 void print_matrix(double**, int, int);
 void delete_matrix(double**, int);
-int generate_random_column_index(double*, int);
 
 #endif

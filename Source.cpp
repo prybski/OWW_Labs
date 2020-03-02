@@ -4,6 +4,7 @@
 
 #include "Random.h"
 #include "Matrix.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -112,6 +113,8 @@ int main()
 	print_matrix(matrix, rows, columns);
 
 	delete_matrix(matrix, rows);
+
+	pause_console();
 
 	return 0;
 }
