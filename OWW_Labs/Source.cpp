@@ -87,7 +87,7 @@ int main()
 	if (nonzeros_max <= 0)
 	{
 		cout << endl << "Ilosc niezerowych elementow w wierszu "
-			<< "macierzy nie moze mniejsza od zera lub rowna zeru.";
+			<< "macierzy nie moze byc mniejsza od zera lub rowna zeru.";
 
 		return -10;
 	}
@@ -112,6 +112,8 @@ int main()
 	print_matrix(matrix, rows, columns);
 
 	delete_matrix(matrix, rows);
+
+	system("pause");
 
 	return 0;
 }
