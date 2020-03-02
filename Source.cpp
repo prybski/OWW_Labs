@@ -113,7 +113,5 @@ int main()
 
 	delete_matrix(matrix, rows);
 
-	system("pause");
-
 	return 0;
-} 
+}
