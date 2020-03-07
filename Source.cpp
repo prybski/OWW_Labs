@@ -11,20 +11,9 @@ using namespace std;
 const int RANDOM_NUMBERS_COUNT = 20;
 const int NONZEROS_MIN = 1;
 
-int main()
+void generate_range_of_random_real_numbers()
 {
-	int i, j;
-	int min_scalar, max_scalar, scalar;
 	double min_real, max_real, real;
-
-	int rows, columns;
-	int nonzeros_max;
-	int nonzeros_counter = NONZEROS_MIN;
-	double** matrix;
-
-	srand((unsigned int)time(NULL));
-
-	cout.setf(ios_base::fixed);
 
 	cout << "Podaj dwie liczby rzeczywiste: ";
 	cin >> min_real >> max_real;
@@ -32,14 +21,14 @@ int main()
 	cout << endl << "Losowe liczby rzeczywiste z zakresu: " << min_real
 		<< " - " << max_real << endl;
 
-	for (i = 0; i < RANDOM_NUMBERS_COUNT; i++)
+	for (int i = 0; i < RANDOM_NUMBERS_COUNT; i++)
 	{
 		real = generate_random(min_real, max_real);
 
 		cout << real << " ";
 
 #ifdef DEBUG
-		if (real < a || real > b)
+		if (real < min_real || real > max_real)
 		{
 			cout << "Blad generacji: " << real << endl;
 
@@ -47,30 +36,53 @@ int main()
 		}
 #endif
 	}
+}
+
+void generate_range_of_random_integer_numbers()
+{
+	int min_integer, max_integer, integer;
 
 	cout << endl << endl << "Podaj dwie liczby calkowite: ";
-	cin >> min_scalar >> max_scalar;
+	cin >> min_integer >> max_integer;
 
-	cout << endl << "Losowe liczby calkowite z zakresu: " << min_scalar
-		<< " - " << max_scalar << endl;
+	cout << endl << "Losowe liczby calkowite z zakresu: " << min_integer
+		<< " - " << max_integer << endl;
 
-	for (i = 0; i < RANDOM_NUMBERS_COUNT; i++)
+	for (int i = 0; i < RANDOM_NUMBERS_COUNT; i++)
 	{
-		scalar = generate_random(min_scalar, max_scalar);
+		integer = generate_random(min_integer, max_integer);
 
-		cout << scalar << " ";
+		cout << integer << " ";
 
 #ifdef DEBUG
-		if (scalar < j || scalar > k)
+		if (integer < min_integer || integer > max_integer)
 		{
-			cout << "Blad generacji: " << scalar << endl;
+			cout << "Blad generacji: " << integer << endl;
 
 			exit(0);
 		}
 #endif
 	}
+}
 
-	cout << endl << endl << "Podaj rozmiar macierzy rzadkiej: ";
+int main()
+{
+	int i, j;
+	int rows, columns;
+	int nonzeros_max;
+	int nonzeros_counter = NONZEROS_MIN;
+	
+	double** matrix;
+
+	srand((unsigned int)time(NULL));
+
+	cout.setf(ios_base::fixed);
+
+	// generate_range_of_random_real_numbers();
+
+	// generate_range_of_random_integer_numbers();
+
+	cout << "Podaj rozmiar macierzy rzadkiej: ";
 	cin >> rows >> columns;
 
 	cout << "Podaj ilosc niezerowych elementow w wierszu macierzy: ";
