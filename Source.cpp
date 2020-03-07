@@ -74,7 +74,7 @@ int main()
 	
 	double** matrix;
 
-	srand((unsigned int)time(NULL))
+	srand((unsigned int)time(NULL));
 
 	cout.setf(ios_base::fixed);
 
