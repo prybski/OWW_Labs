@@ -16,7 +16,7 @@ void generate_range_of_random_real_numbers()
 	double min_real, max_real, real;
 
 	cout << "Podaj dwie liczby rzeczywiste: ";
-	cin >> min_real >> max_real
+	cin >> min_real >> max_real;
 
 	cout << endl << "Losowe liczby rzeczywiste z zakresu: " << min_real
 		<< " - " << max_real << endl;
