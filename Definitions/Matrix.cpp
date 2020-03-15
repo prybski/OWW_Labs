@@ -20,10 +20,11 @@ double** generate_matrix(int n, int m)
 	{
 		matrix[i] = new double[m];
 
+		memset((void *)matrix[i], 0, _msize((void *)matrix[i]));
+
 		for (int j = 0; j < m; j++)
 		{
 			if (i == j) matrix[i][j] = generate_random((double)1, (double)2);
-			else matrix[i][j] = (double)0;
 		}
 	}
 
