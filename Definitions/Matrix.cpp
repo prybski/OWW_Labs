@@ -8,7 +8,7 @@ int generate_random_column_index(double* matrix_row, int m)
 {
 	int proper_index = generate_random(0, m - 1);
 
-	if (matrix_row[proper_index] == (double)0) return proper_index;
+	if (matrix_row[proper_index] == 0.0) return proper_index;
 	else return generate_random_column_index(matrix_row, m);
 }
 
@@ -20,11 +20,10 @@ double** generate_matrix(int n, int m)
 	{
 		matrix[i] = new double[m];
 
-		memset((void *)matrix[i], 0, _msize((void *)matrix[i]));
-
 		for (int j = 0; j < m; j++)
 		{
-			if (i == j) matrix[i][j] = generate_random((double)1, (double)2);
+			if (i == j) matrix[i][j] = generate_random(1.0, 2.0);
+			else matrix[i][j] = 0.0;
 		}
 	}
 
@@ -42,7 +41,7 @@ double** generate_rare_matrix(double** matrix, int n, int m, int k)
 			if (counter == k) continue;
 
 			matrix[i][generate_random_column_index(matrix[i], m)]
-				= generate_random((double)0, (double)1);
+				= generate_random(0.0, 1.0);
 
 			counter++;
 		}
