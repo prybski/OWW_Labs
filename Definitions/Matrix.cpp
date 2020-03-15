@@ -30,7 +30,7 @@ double** generate_matrix(int n, int m)
 	return matrix;
 }
 
-double** generate_rare_matrix(double** matrix, int n, int m, int k)
+double** generate_sparse_matrix(double** matrix, int n, int m, int k)
 {
 	int counter = NONZEROS_MIN;
 
