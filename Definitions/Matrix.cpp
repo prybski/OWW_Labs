@@ -2,6 +2,8 @@
 
 using namespace std;
 
+const int NONZEROS_MIN = 1;
+
 int generate_random_column_index(double* matrix_row, int m)
 {
 	int proper_index = generate_random(0, m - 1);
@@ -23,6 +25,28 @@ double** generate_matrix(int n, int m)
 			if (i == j) matrix[i][j] = generate_random((double)1, (double)2);
 			else matrix[i][j] = (double)0;
 		}
+	}
+
+	return matrix;
+}
+
+double** generate_rare_matrix(double** matrix, int n, int m, int k)
+{
+	int counter = NONZEROS_MIN;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			if (counter == k) continue;
+
+			matrix[i][generate_random_column_index(matrix[i], m)]
+				= generate_random((double)0, (double)1);
+
+			counter++;
+		}
+
+		counter = NONZEROS_MIN;
 	}
 
 	return matrix;
