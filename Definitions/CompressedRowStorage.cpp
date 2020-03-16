@@ -57,16 +57,3 @@ tuple<double *, int *, int *> generate_CRS_format(double **sparse_matrix, int n,
 
     return {val, col_ind, row_ptr};
 }
-
-void print_row_ptr(int *row_ptr, string label, int n)
-{
-    cout << endl
-         << label << ": ";
-
-    for (int i = 0; i < n; i++)
-    {
-        cout << row_ptr[i] << (i != n - 1 ? ", " : "");
-    }
-
-    cout << endl;
-}

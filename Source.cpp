@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
+#include "Array.h"
 #include "Random.h"
 #include "SparseMatrix.h"
 #include "CompressedRowStorage.h"
@@ -64,7 +65,7 @@ int main()
 
 	print_array(val, "val", rows, nonzeros);
 	print_array(col_ind, "col_ind", rows, nonzeros);
-	print_row_ptr(row_ptr, "row_ptr", rows + 1);
+	print_array(row_ptr, "row_ptr", rows + 1);
 
 	double *x = new double[rows];
 
