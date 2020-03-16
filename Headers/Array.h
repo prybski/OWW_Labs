@@ -12,9 +12,7 @@ void print_array(T *array, string label, int n, int k = 1)
          << label << ": ";
 
     for (int i = 0; i < k * n; i++)
-    {
         cout << array[i] << (i != (k * n) - 1 ? ", " : "");
-    }
 
     cout << endl;
 }

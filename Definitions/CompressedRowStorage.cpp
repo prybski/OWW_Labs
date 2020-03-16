@@ -13,9 +13,7 @@ double *multiply_sparse_matrix_in_CRS_format(double *x, double *val, int *row_pt
         y[i] = 0.0;
 
         for (int j = row_ptr[i]; j < row_ptr[i + 1]; j++)
-        {
             y[i] += val[j] * x[col_ind[j]];
-        }
     }
 
     return y;
