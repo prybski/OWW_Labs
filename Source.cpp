@@ -3,9 +3,8 @@
 #include <iomanip>
 
 #include "Random.h"
-#include "Matrix.h"
-#include "Utils.h"
-#include "MatrixFormat.h"
+#include "SparseMatrix.h"
+#include "CompressedRowStorage.h"
 
 using namespace std;
 
@@ -13,6 +12,8 @@ int main()
 {
 	int rows, columns;
 	int nonzeros;
+
+	double *y;
 
 	double **sparse_matrix;
 
@@ -62,12 +63,27 @@ int main()
 	delete_matrix(sparse_matrix, rows);
 
 	print_array(val, "val", rows, nonzeros);
-
 	print_array(col_ind, "col_ind", rows, nonzeros);
+	print_row_ptr(row_ptr, "row_ptr", rows + 1);
 
-	print_array(row_ptr, "row_ptr", rows);
+	double *x = new double[rows];
 
-	pause_console();
+	cout << endl
+		 << "Podaj wektor, przez ktory nalezy pomnozyc macierz rzadka: ";
+
+	for (int i = 0; i < rows; i++)
+		cin >> x[i];
+
+	print_array(x, "x", rows);
+
+	y = multiply_sparse_matrix_in_CRS_format(
+		x,
+		val,
+		row_ptr,
+		col_ind,
+		rows);
+
+	print_array(y, "y", rows);
 
 	return 0;
 }
