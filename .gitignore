@@ -115,6 +115,7 @@ ipch/
 # Visual Studio Code Files
 .vscode/
 Source
+*.o
 
 # TFS 2012 Local Workspace
 $tf/

@@ -33,7 +33,8 @@ int main()
 		cout << endl
 			 << "Ilosc niezerowych elementow w wierszu macierzy "
 			 << "nie moze byc wieksza od liczby jej kolumn lub rowna "
-			 << "liczbie jej kolumn.";
+			 << "liczbie jej kolumn."
+			 << endl;
 
 		return -1;
 	}
@@ -42,7 +43,8 @@ int main()
 	{
 		cout << endl
 			 << "Ilosc niezerowych elementow w wierszu "
-			 << "macierzy nie moze byc mniejsza od zera lub rowna zeru.";
+			 << "macierzy nie moze byc mniejsza od zera lub rowna zeru."
+			 << endl;
 
 		return -10;
 	}
@@ -93,7 +95,8 @@ int main()
 		cout << endl
 			 << "Czy wyniki mnozenia macierzy rzadkiej przez wektor "
 			 << "sa takie same dla formatu CRS i standardowego? "
-			 << (arrays_are_equal(y_CRS, y_STANDARD, n) ? "true" : "false");
+			 << (arrays_are_equal(y_CRS, y_STANDARD, n) ? "true" : "false")
+			 << endl;
 	}
 	else
 	{

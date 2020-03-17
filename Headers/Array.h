@@ -2,6 +2,7 @@
 #define ARRAY_H
 
 #include <string>
+#include <iostream>
 
 #include "Random.h"
 

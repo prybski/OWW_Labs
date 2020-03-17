@@ -2,6 +2,7 @@
 #define MATRIX_FORMAT_H
 
 #include <iostream>
+#include <tuple>
 
 using namespace std;
 
