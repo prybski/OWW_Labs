@@ -11,24 +11,24 @@ using namespace std;
 
 int main()
 {
-	int rows, columns;
+	int n;
 	int nonzeros;
 
-	double *y;
+	double *x, *y_CRS, *y_STANDARD;
 
-	double **sparse_matrix;
+	double **sparse_matrix, **sparse_matrix_from_CRS;
 
 	srand((unsigned int)time(NULL));
 
 	cout.setf(ios_base::fixed);
 
 	cout << "Podaj rozmiar macierzy rzadkiej: ";
-	cin >> rows >> columns;
+	cin >> n;
 
 	cout << "Podaj ilosc niezerowych elementow w wierszu macierzy: ";
 	cin >> nonzeros;
 
-	if (nonzeros >= columns)
+	if (nonzeros >= n)
 	{
 		cout << endl
 			 << "Ilosc niezerowych elementow w wierszu macierzy "
@@ -48,43 +48,73 @@ int main()
 	}
 
 	sparse_matrix = generate_sparse_matrix(
-		generate_matrix(rows, columns),
-		rows,
-		columns,
+		generate_matrix(n),
+		n,
 		nonzeros);
 
-	print_matrix(sparse_matrix, rows, columns);
-
-	auto [val, col_ind, row_ptr] = generate_CRS_format(
+	auto [val, col_ind, row_ptr] = to_CRS_format(
 		sparse_matrix,
-		rows,
-		columns,
+		n,
 		nonzeros);
 
-	delete_matrix(sparse_matrix, rows);
+	sparse_matrix_from_CRS = from_CRS_format(val, col_ind, row_ptr, n);
 
-	print_array(val, "val", rows, nonzeros);
-	print_array(col_ind, "col_ind", rows, nonzeros);
-	print_array(row_ptr, "row_ptr", rows + 1);
+	if (matrices_are_equal(sparse_matrix, sparse_matrix_from_CRS, n))
+	{
+		cout << endl
+			 << "Macierz rzadka zapisana w formacie 'CRS' zgadza sie "
+			 << "z macierza w formacie standardowym."
+			 << endl;
 
-	double *x = new double[rows];
+		if (n <= 10)
+		{
+			print_array(val, "val", n, nonzeros);
+			print_array(col_ind, "col_ind", n, nonzeros);
+			print_array(row_ptr, "row_ptr", n + 1);
+		}
 
-	cout << endl
-		 << "Podaj wektor, przez ktory nalezy pomnozyc macierz rzadka: ";
+		x = generate_random_array(n);
 
-	for (int i = 0; i < rows; i++)
-		cin >> x[i];
+		y_CRS = multiply_sparse_matrix_CRS(
+			x,
+			val,
+			col_ind,
+			row_ptr,
+			n);
 
-	print_array(x, "x", rows);
+		y_STANDARD = multiply_sparse_matrix(sparse_matrix_from_CRS, x, n);
 
-	y = multiply_sparse_matrix_in_CRS_format(
-		x,
-		val,
-		row_ptr,
-		col_ind,
-		rows);
+		if (n <= 10000)
+		{
+			print_array(y_CRS, "y (macierz rzadka w formacie CRS)", n);
+			print_array(y_STANDARD, "y (macierz rzadka w formacie standardowym)", n);
+		}
 
-	print_array(y, "y", rows);
+		cout << endl
+			 << "Czy wyniki mnozenia macierzy rzadkiej przez wektor "
+			 << "sa takie same dla formatu CRS i standardowego? "
+			 << (arrays_are_equal(y_CRS, y_STANDARD, n) ? "true" : "false");
+	}
+	else
+	{
+		cout << endl
+			 << "Macierz rzadka zapisana w formacie 'CRS' nie zgadza sie "
+			 << "z macierza w formacie standardowym."
+			 << endl;
+	}
+
+	delete_matrix(sparse_matrix, n);
+
+	delete[] val;
+	delete[] col_ind;
+	delete[] row_ptr;
+
+	delete[] x;
+
+	delete_matrix(sparse_matrix_from_CRS, n);
+
+	delete[] y_CRS;
+	delete[] y_STANDARD;
 
 	return 0;
 }

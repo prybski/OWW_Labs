@@ -1,10 +1,11 @@
 #include "CompressedRowStorage.h"
+#include "SparseMatrix.h"
 
 using namespace std;
 
 const int VAL_MIN = 1;
 
-double *multiply_sparse_matrix_in_CRS_format(double *x, double *val, int *row_ptr, int *col_ind, int n)
+double *multiply_sparse_matrix_CRS(double *x, double *val, int *col_ind, int *row_ptr, int n)
 {
     double *y = new double[n];
 
@@ -19,7 +20,20 @@ double *multiply_sparse_matrix_in_CRS_format(double *x, double *val, int *row_pt
     return y;
 }
 
-tuple<double *, int *, int *> generate_CRS_format(double **sparse_matrix, int n, int m, int k)
+double **from_CRS_format(double *val, int *col_ind, int *row_ptr, int n)
+{
+    double **matrix = generate_zeros_matrix(n);
+
+	for (int i = 0; i < n; i++)
+    {
+        for (int j = row_ptr[i]; j < row_ptr[i + 1]; j++)
+            matrix[i][col_ind[j]] = val[j];
+    }
+
+    return matrix;
+}
+
+tuple<double *, int *, int *> to_CRS_format(double **sparse_matrix, int n, int k)
 {
     int val_idx = 0;
     int col_ind_idx = 0;
@@ -34,7 +48,7 @@ tuple<double *, int *, int *> generate_CRS_format(double **sparse_matrix, int n,
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        for (int j = 0; j < n; j++)
         {
             if (sparse_matrix[i][j] != 0.0)
             {

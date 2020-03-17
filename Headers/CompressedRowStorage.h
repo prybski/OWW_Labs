@@ -5,7 +5,8 @@
 
 using namespace std;
 
-double *multiply_sparse_matrix_in_CRS_format(double *, double *, int *, int *, int);
-tuple<double *, int *, int *> generate_CRS_format(double **, int, int, int);
+double *multiply_sparse_matrix_CRS(double *, double *, int *, int *, int);
+double **from_CRS_format(double *, int *, int *, int);
+tuple<double *, int *, int *> to_CRS_format(double **, int, int);
 
 #endif

@@ -3,7 +3,12 @@
 
 #include <string>
 
+#include "Random.h"
+
 using namespace std;
+
+bool arrays_are_equal(double * array_first, double * array_second, int n);
+double *generate_random_array(int);
 
 template <typename T>
 void print_array(T *array, string label, int n, int k = 1)
